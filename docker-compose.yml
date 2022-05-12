@@ -1,0 +1,70 @@
+version: '3.5'
+
+networks:
+  backend:
+    name: ${SITE_NAME:-site}_network
+
+services:
+  wordpress:
+    image: wordpress:${WORDPRESS_VERSION:-5.9}
+    container_name: ${SITE_NAME:-site}_wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    depends_on:
+      - mysql
+    ports:
+      - ${WORDPRESS_PORT:-80}:80
+    volumes:
+      - ./wordpress/code:/var/www/html
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "10"
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:${MYSQL_VERSION:-8.0}
+    container_name: ${SITE_NAME:-site}_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./mysql/data/:/var/lib/mysql/
+      - ./mysql/initdb.d/:/docker-entrypoint-initdb.d/
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "10"
+    networks:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ${SITE_NAME:-site}_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+      UPLOAD_LIMIT: 50000000
+    depends_on:
+      - mysql
+    ports:
+      - ${PHPMYADMIN_PORT:-81}:80
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "10"
+    networks:
+      - backend
