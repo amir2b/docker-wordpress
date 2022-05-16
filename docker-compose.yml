@@ -2,12 +2,12 @@ version: '3.5'
 
 networks:
   backend:
-    name: ${SITE_NAME:-site}_network
+    name: ${SITE_NAME:-wordpress}_network
 
 services:
   wordpress:
-    image: wordpress:${WORDPRESS_VERSION:-5.9}
-    container_name: ${SITE_NAME:-site}_wordpress
+    build: wordpress
+    container_name: ${SITE_NAME:-wordpress}_php
     restart: always
     environment:
       WORDPRESS_DB_HOST: mysql
@@ -29,7 +29,7 @@ services:
 
   mysql:
     image: mysql:${MYSQL_VERSION:-8.0}
-    container_name: ${SITE_NAME:-site}_mysql
+    container_name: ${SITE_NAME:-wordpress}_mysql
     restart: always
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -51,7 +51,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:latest
-    container_name: ${SITE_NAME:-site}_phpmyadmin
+    container_name: ${SITE_NAME:-wordpress}_phpmyadmin
     restart: always
     environment:
       PMA_HOST: mysql

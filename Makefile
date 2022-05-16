@@ -1,6 +1,6 @@
 #!/usr/bin/env make
 
-CONTAINER=php
+CONTAINER=wordpress
 
 all: down update start logs
 
