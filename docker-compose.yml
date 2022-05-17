@@ -9,11 +9,6 @@ services:
     build: wordpress
     container_name: ${SITE_NAME:-wordpress}_php
     restart: always
-    environment:
-      WORDPRESS_DB_HOST: mysql
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
     depends_on:
       - mysql
     ports:
