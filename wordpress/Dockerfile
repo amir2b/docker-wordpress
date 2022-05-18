@@ -23,3 +23,8 @@ RUN PHP_VERSION=$(php -v | head -n1 | cut -d' ' -f2 | cut -d. -f1-2) \
     && cp ixed.${PHP_VERSION}.lin "$(php -i | grep '^extension_dir =' | cut -d' ' -f3)/sourceguardian.so" \
     && echo "extension=sourceguardian.so" > /usr/local/etc/php/conf.d/15-sourceguardian.ini \
     && rm -rf /tmp/sourceguardian
+
+## Setup wordpress
+RUN curl https://wordpress.org/latest.tar.gz --output /tmp/wordpress.tar.gz \
+    && tar -xzvf /tmp/wordpress.tar.gz -C /var/www/html/ --strip-components=1 \
+    && rm /tmp/wordpress.tar.gz
