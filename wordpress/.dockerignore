@@ -1,4 +1,4 @@
-/code
-Dockerfile
-.dockerignore
-.gitignore
+/code/
+/Dockerfile
+/.dockerignore
+/.gitignore
