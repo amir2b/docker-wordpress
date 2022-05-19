@@ -44,3 +44,16 @@ make start
 make restart
 make logs
 ```
+
+## Environment
+
+* SITE_NAME: wordpress
+* WORDPRESS_PORT: 80
+* WORDPRESS_VERSION: 5.9
+* MYSQL_DATABASE
+* MYSQL_USER
+* MYSQL_PASSWORD
+* MYSQL_ROOT_PASSWORD
+* MYSQL_PORT: 3306
+* MYSQL_VERSION: 8.0
+* PHPMYADMIN_PORT: 81
