@@ -3,6 +3,10 @@
 ## Change path to root of project
 cd "$(dirname $0)/../"
 
+read -p "Are you sure? [y/N] " -n 1 -r
+echo
+[[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
+
 ## Remove wordpress files
 rm -rf wordpress/code/*
 find wordpress/code/ -type f -exec rm {} \;
