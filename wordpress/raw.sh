@@ -8,9 +8,10 @@ echo
 [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
 
 ## Remove wordpress files
-rm -rf wordpress/code/*
-find wordpress/code/ -type f -exec rm {} \;
+rm -rf wordpress/code/
+mkdir -p wordpress/code/
 
 ## Download and extract fresh wordpress
 curl https://wordpress.org/latest.tar.gz --output /tmp/wordpress.tar.gz
 tar -xzvf /tmp/wordpress.tar.gz -C wordpress/code/ --strip-components=1
+rm /tmp/wordpress.tar.gz

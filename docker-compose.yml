@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.9'
 
 networks:
   backend:
@@ -7,7 +7,7 @@ networks:
 services:
   wordpress:
     build: wordpress
-    container_name: ${SITE_NAME:-wordpress}_php
+    container_name: ${SITE_NAME:-wordpress}_wordpress
     restart: always
     depends_on:
       - mysql

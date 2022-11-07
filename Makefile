@@ -21,23 +21,23 @@ init:
 
 build: .env
 	@echo "===== Docker build ====="
-	docker-compose build --compress --parallel
+	docker compose build --compress --parallel
 
 up: .env
 	@echo "===== Docker up ====="
-	docker-compose up
+	docker compose up
 
 down: .env
 	@echo "===== Docker down ====="
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 start: .env
 	@echo "===== Docker start ====="
-	docker-compose up -d
+	docker compose up -d
 
 stop: .env
 	@echo "===== Docker stop ====="
-	docker-compose stop
+	docker compose stop
 
 restart: .env
 	@echo "===== Docker restart ====="
@@ -46,19 +46,19 @@ restart: .env
 
 remove: stop
 	@echo "===== Remove containers ====="
-	docker-compose rm -f
+	docker compose rm -f
 
 logs: .env
 	@echo "===== Docker logs ====="
-	docker-compose logs -f
+	docker compose logs -f
 
 run: .env
 	@echo "===== Docker run container ====="
-	docker-compose run --rm ${CONTAINER} bash
+	docker compose run --rm ${CONTAINER} bash
 
 exec: .env
 	@echo "===== Docker exec container ====="
-	docker-compose exec ${CONTAINER} bash
+	docker compose exec ${CONTAINER} bash
 
 stats:
 	@echo "===== Docker stats ====="
@@ -66,7 +66,7 @@ stats:
 
 ps:
 	@echo "===== Print state of containers ====="
-	docker-compose ps
+	docker compose ps
 
 update:
 	@echo "===== Git Update ====="

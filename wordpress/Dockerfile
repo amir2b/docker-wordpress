@@ -1,4 +1,4 @@
-ARG WORDPRESS_VERSION=5.9
+ARG WORDPRESS_VERSION=latest
 FROM wordpress:${WORDPRESS_VERSION}
 
 ## Change uid & gid
